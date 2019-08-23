@@ -1,18 +1,17 @@
 #furry_engine project
-#To start project*:
+#Для старта проекта*:
 
 ```bash
 git clone https://github.com/metro6/furry-engine.git
 cd furry-engine
 ```
-Make settings file for Database.
+Создайте файл с настройками БД
 ```bash
 touch src/custom_settings/custom_settings.py
 nano src/custom_settings/custom_settings.py
 ```
-Copy these text, or add you configurations database and SMTP server:
+Запишите файл с конфигурацией БД
 ```
-#USE THIS CONFIGURATION BATABASE!!!
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -22,47 +21,36 @@ DATABASES = {
         'PORT': 5432,
     }
 }
-#END CONFIGURATION DATABASE
-
-#YOUR SMTP SERVER CONFIG
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'your_login'
-EMAIL_HOST_PASSWORD = 'your_password'
-EMAIL_PORT = 587
-#END CONFIGURATION SMTP SERVER
-
 ```
 
-Save it and run project:
+Сохраните это и запустите проект:
 ```bash
 (sudo) make build
 (sudo) make up
 ```
 
-You may stop project:
+Остановить проект:
 ```bash
 (sudo) make down
 ```
 
-After downloading, the project is available at "http://you_domain_or_ip:8001"
+После окончания загрузки, проект запустится тут: http://localhost:8001"
 
-Project used:
+В проекте используются:
 - docker-compose
 - nginx
 - gunicorn
 - django
+- django-rest-framework
 - postgresql
 
-*Optional 
-
-You can run the project in a more familiar way.
+После запуска проекта, вы можете подключиться к докеру и создать суперпользователя (он понадобится для получения токена)
 ```bash
-(sudo) docker-compose build
-(sudo) docker-compose up
+docker-compose exec web bash
 ```
-
-And stop this
+После инклуда в докер, создаете пользователя:
 ```bash
-(sudo) docker-compose down
+./manage.py createsuperuser
 ```
+Дальше, сделайте тестовые запросы, получите токен авторизации, и сделайте пару запросов. 
+Подробная документация по API доступна по адресу http://localhost:8001/api/v1/swagger/

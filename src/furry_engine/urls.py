@@ -19,18 +19,16 @@ from django.conf.urls import url, include
 from django.conf import settings
 from django.views.static import serve
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.conf.urls.i18n import i18n_patterns
 
 
-
-from . import views as rmrail
+from . import views as furry_engine
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
 urlpatterns += [
-    url(r'^$', rmrail.main, name="home"),
+    url(r'^$', furry_engine.main, name="home"),
     url(r'api/v1/', include('apps.api.urls')),
 ]
 

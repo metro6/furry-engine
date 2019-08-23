@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'furry_engine',
     'apps.user.apps.UserConfig',
     'apps.forms.apps.FormsConfig',
+    'apps.client_info.apps.ClientInfoConfig',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'furry_engine.urls'
@@ -184,14 +185,21 @@ CRONJOBS = [
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.AllowAny',
-    # ],
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 10,
-    'DEFAULT_AUTHENTIFICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'rest_framework_swagger.renderers.SwaggerUIRenderer',
+    # )
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}
 
-
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Basic': {'type': 'basic'},
+        'Token': {'type': 'apiKey', 'name': 'Authorization', 'in': 'header'},
+    },
 }
