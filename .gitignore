@@ -1,0 +1,9 @@
+/venv/
+/.idea/
+*.py[cod]
+node_modules
+#/src/furry_engine/stilus/
+/src/custom_settings/custom_settings.py
+/src/static/
+/postgres/
+/src/log.log
